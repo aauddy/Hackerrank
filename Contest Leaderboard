@@ -1,0 +1,13 @@
+Problem link: https://www.hackerrank.com/challenges/contest-leaderboard/problem
+
+Solution:
+
+select h.hacker_id, name, sum(max_score) as tot_score
+from hackers h left join
+(select hacker_id, challenge_id, max(score) as max_score
+ from submissions s
+ group by hacker_id, challenge_id) as max_score_tab
+on h.hacker_id = max_score_tab.hacker_id
+group by h.hacker_id, name
+having tot_score > 0
+order by tot_score desc, h.hacker_id
