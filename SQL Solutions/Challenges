@@ -1,0 +1,12 @@
+Problem link:https://www.hackerrank.com/challenges/challenges/problem
+
+Solution:
+
+select h.hacker_id, name , count(challenge_id) as challenge_counts
+from hackers h inner join challenges c
+on h.hacker_id = c.hacker_id
+group by h.hacker_id, name 
+having challenge_counts = (select max(xchallenge) from (select count(challenge_id) as xchallenge from challenges group by hacker_id)maxchallenge)
+or 
+challenge_counts in (select xchallenge from (select count(challenge_id) as xchallenge from challenges group by hacker_id) as xchallenge group by xchallenge having count(xchallenge)=1)
+order by count(challenge_id) desc, h.hacker_id
