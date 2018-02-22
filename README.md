@@ -1,2 +1,2 @@
-Hackerrank Solutions
+Hackerrank SQL Solutions using MYSQL.
 
